@@ -1,11 +1,21 @@
+# 
+# GitHub Actions workflow.
+#
+# Automatically deploys the Node.js microservice to Kubernetes on push to any branch. 
+# For real use you might want to restrict this to the "prod" branch.
+#
 name: Deploy Library microservice to kubernetes
 
 on:
-
+  #
+  # Deploys the microservice on push to the master branch of this code repository.
+  #
   push: 
     branches:
-      - main
-
+      - master
+  #
+  # Allows deployment to be invoked manually through the GitHub Actions user interface.
+  #
   workflow_dispatch: 
 
 permissions:
@@ -81,13 +91,17 @@ jobs:
         run: |
           KUBECONFIG_CONTENT=$(terraform-bin output -raw kube_config)
           echo "KUBECONFIG_CONTENT=$KUBECONFIG_CONTENT" >> $GITHUB_ENV
-
+      #
+      # Installs Kubectl and connects it to the cluster.
+      #
       - name: Set up kubectl
         uses: tale/kubectl-action@v1
         with:
           base64-kube-config: ${{ env.KUBECONFIG_CONTENT }}
           kubectl-version: v1.30.3
-
+      #
+      # Expands the configuration template and deploys the microservice.
+      #
       - name: Deploy Docker images
         env:
           CONTAINER_REGISTRY: ${{ env.CONTAINER_REGISTRY }}
