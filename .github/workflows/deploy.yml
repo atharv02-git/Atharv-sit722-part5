@@ -4,7 +4,7 @@
 # Automatically deploys the Node.js microservice to Kubernetes on push to any branch. 
 # For real use you might want to restrict this to the "prod" branch.
 #
-name: Deploy Library microservice to kubernetes
+name: Deploy microservice 
 
 on:
   #
