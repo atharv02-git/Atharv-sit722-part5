@@ -3,23 +3,23 @@ version: '3'
 services:
  # book-catalog Microservice
   book_catalog:
-    image: book_catalog:v1
+    image: $CONTAINER_REGISTRY.azurecr.io/book_catalog:$VERSION
     build: 
       context: ./book_catalog
       dockerfile: Dockerfile
     container_name: book_catalog
     environment:
       - PORT=8000
-      - DATABASE_URL=postgresql://sit722projectpart3_user:kk7ISoQi57rijke66eJPXJbTV8Xe6FQJ@dpg-crjutnl2ng1s73flchbg-a.oregon-postgres.render.com/sit722projectpart3
+      - DATABASE_URL=postgresql://sit722part5_n6v2_user:7swYeCyduFOrAlSslBiL8I3Dnr0ATzcW@dpg-cru96p8gph6c73aenl3g-a.oregon-postgres.render.com/sit722part5_n6v2
     restart: "no"
 
   inventory_management:
-    image: inventory_management:v1
+    image: $CONTAINER_REGISTRY.azurecr.io/inventory_management:$VERSION
     build: 
       context: ./inventory_management
       dockerfile: Dockerfile
     container_name: inventory_management
     environment:
       - PORT=8001
-      - DATABASE_URL=postgresql://sit722projectpart3_user:kk7ISoQi57rijke66eJPXJbTV8Xe6FQJ@dpg-crjutnl2ng1s73flchbg-a.oregon-postgres.render.com/sit722projectpart3
+      - DATABASE_URL=postgresql://sit722part5_n6v2_user:7swYeCyduFOrAlSslBiL8I3Dnr0ATzcW@dpg-cru96p8gph6c73aenl3g-a.oregon-postgres.render.com/sit722part5_n6v2
     restart: "no"
